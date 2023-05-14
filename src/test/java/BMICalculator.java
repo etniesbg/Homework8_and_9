@@ -6,7 +6,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
 public class BMICalculator {
@@ -14,6 +16,7 @@ public class BMICalculator {
     @BeforeTest
     public static void setUp(){
         UtilDriver.setUpDriver();
+        UtilDriver.getDriver().get("http://pragmatic.bg/automation/lecture15/bmicalculator.html");
     }
 
     @AfterTest
@@ -23,17 +26,18 @@ public class BMICalculator {
 
     @Given("the user in a BMI Calculator page")
     public static void the_User_Is_In_BMICalculator_Page(){
-        UtilDriver.getDriver().get("http://pragmatic.bg/automation/lecture15/bmicalculator.html");
+//        UtilDriver.setUpDriver();
+//        UtilDriver.getDriver().get("http://pragmatic.bg/automation/lecture15/bmicalculator.html");
     }
 
-    @When("he enters {String}")
-    public static void he_Enters_Weight(String weight){
-        BMICalculatorPage.setWeightKilograms(weight);
+    @When("he enters weights {string}")
+    public static void he_Enters_Weight(String weights1){
+        BMICalculatorPage.setWeightKilograms(weights1);
     }
 
-    @And("he enters {String}")
-    public static void he_Enters_Height(String height){
-        BMICalculatorPage.setHeightField(height);
+    @And("he enters heights {string}")
+    public static void he_Enters_Height(String heights1){
+        BMICalculatorPage.setHeightField(heights1);
     }
 
     @And("he calculates")
@@ -41,11 +45,17 @@ public class BMICalculator {
         BMICalculatorPage.pressCalculate();
     }
 
-    @Then("Expected result must be {String} / {String}")
-    public static void verify_Correct_Category(String bmiIndex, String bmiCategory){
-        String verifier = bmiIndex + bmiCategory;
-        String actualValues = BMICalculatorPage.getBmiValue() + BMICalculatorPage.getBmiCategory();
+    @Then("Expected BMI index must be {string}")
+    public static void verify_Correct_BMI_Index(String bmiIndex){
+        String verifier = bmiIndex;
+        String actualValues = BMICalculatorPage.getBmiValue();
         Assert.assertEquals(verifier, actualValues);
     }
 
+    @Then("Expected BMI Category must be {string}")
+    public static void verify_Correct_BMI_Category(String bmiCategory){
+        String verifier = bmiCategory;
+        String actualValues = BMICalculatorPage.getBmiCategory();
+        Assert.assertEquals(verifier, actualValues);
+    }
 }

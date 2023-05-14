@@ -3,6 +3,7 @@
     <test name="Regression1">
         <classes>
             <class name="BMICalculator"/>
+            <class name="RunBMItests"/>
         </classes>
     </test>
 </suite>
