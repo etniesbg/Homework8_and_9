@@ -4,17 +4,31 @@ Feature: BMI Calculator
   so I can see if I'm overweight,
   underweight or I have a normal body
 
-   @regression
-    Scenario Outline: data driven tests All available ways this can go
-    Given the user in a BMI Calculator page
-    When he enters heights "<heights1>"
-    And he enters weights "<weights1>"
+#   @BMICalculator @regression
+#    Scenario Outline: data driven tests All available ways this can go
+#    Given the user in a BMI Calculator page
+#    When he enters heights "<heights1>"
+#    And he enters weights "<weights1>"
+#    And he calculates
+#    Then Expected BMI index must be "<bmiIndex>"
+#     Then Expected BMI Category must be "<bmiCategory>"
+#     Examples:
+#       | heights1 | weights1 | bmiIndex | bmiCategory |
+#       | 170      | 50       | 17.3     | Underweight |
+#       | 170      | 55       | 19       | Normal      |
+#       | 170      | 80       | 27.7     | Overweight  |
+#       | 170      | 100      | 34.6     | Obesity     |
+
+  @BMICalculator @regression
+  Scenario Outline: data driven tests All available ways this can go
+    Given he enters heights "<inputHeight>"
+    When he enters weights "<inputWeight>"
     And he calculates
     Then Expected BMI index must be "<bmiIndex>"
-     Then Expected BMI Category must be "<bmiCategory>"
-     Examples:
-       | heights1 | weights1 | bmiIndex | bmiCategory |
-       | 170      | 50       | 17.3     | Underweight |
-       | 170      | 55       | 19       | Normal      |
-       | 170      | 80       | 27.7     | Overweight  |
-       | 170      | 100      | 34.6     | Obesity     |
+    Then Expected BMI Category must be "<bmiCategory>"
+    Examples:
+      | inputHeight | inputWeight | bmiIndex | bmiCategory |
+      | 170      | 50       | 17.3     | Underweight |
+      | 170      | 55       | 19       | Normal      |
+      | 170      | 80       | 27.7     | Overweight  |
+      | 170      | 100      | 34.6     | Obesity     |

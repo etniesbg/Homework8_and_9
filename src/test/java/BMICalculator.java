@@ -6,42 +6,34 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 public class BMICalculator {
 
-    @BeforeTest
+    @BeforeMethod
     public static void setUp(){
         UtilDriver.setUpDriver();
         UtilDriver.getDriver().get("http://pragmatic.bg/automation/lecture15/bmicalculator.html");
     }
 
-    @AfterTest
-    public static void tearDown(){
-        UtilDriver.getDriver().quit();
+//    @AfterMethod
+//    public static void tearDown(){
+//        UtilDriver.getDriver().quit();
+//    }
+
+    @Given("he enters heights {string}")
+    public static void he_Enters_Height(String inputHeight){
+        BMICalculatorPage.setHeightField(inputHeight);
     }
 
-    @Given("the user in a BMI Calculator page")
-    public static void the_User_Is_In_BMICalculator_Page(){
-//        UtilDriver.setUpDriver();
-//        UtilDriver.getDriver().get("http://pragmatic.bg/automation/lecture15/bmicalculator.html");
-    }
 
     @When("he enters weights {string}")
-    public static void he_Enters_Weight(String weights1){
-        BMICalculatorPage.setWeightKilograms(weights1);
-    }
-
-    @And("he enters heights {string}")
-    public static void he_Enters_Height(String heights1){
-        BMICalculatorPage.setHeightField(heights1);
+    public static void he_Enters_Weight(String inputWeight){
+        BMICalculatorPage.setWeightKilograms(inputWeight);
     }
 
     @And("he calculates")
-    public static void he_Clicks_The_Button_Calculate(){
+    public static void he_Calculates(){
         BMICalculatorPage.pressCalculate();
     }
 
